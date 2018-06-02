@@ -52,14 +52,20 @@ select_file.action = file_choice;
 
 
 function password_button:action()
-	password_label.value = get_password(file);--'passw0rd123';
-	password_label.fgcolor = '0 255 120';
+	if not is_valid then
+		iup.Message('Error', 'Please choose a valid file first');
+	else
+		password_label.value = get_password(file);--'passw0rd123';
+		password_label.fgcolor = '0 255 120';
+	end
 end
 
 function save_button:action()
 	if is_valid then
 		dump_embedded_file(file, outfile.value);
 		iup.Message('Information', 'File saved under the name ' .. outfile.value);
+	else
+		iup.Message('Error', 'Please choose a valid file first');
 	end
 end
 
@@ -71,7 +77,7 @@ local frame = iup.frame{
 								iup.fill{},
 								gap='30'
 							},
-							title='Frame'
+							title='Options'
 };
 
 
