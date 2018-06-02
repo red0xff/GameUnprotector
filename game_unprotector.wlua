@@ -10,7 +10,7 @@ local valid = iup.text{ value='waiting for your choice', size='150x15', readonly
 local select_file = iup.button{ title='Select file', size='40x26' };
 local hbox1 = iup.hbox{file_label, filename, select_file, valid, gap="20"};
 local filedlg = iup.filedlg{dialogtype = "LOAD", title = "Load protected file", 
-                      filter = "*.exe", filterinfo = "Executable files"};
+                      filter = "*.exe", filterinfo = "GameProtector protected files"};
 
 
 local outfile = iup.text{title='text', size="275x20"};
@@ -32,17 +32,17 @@ local function file_choice()
 		file = io.open(filename.value, 'rb');
 		-- check if valid file
 		if valid_file(file) then
-			valid.value = 'Fichier valide';
+			valid.value = 'File is valid';
 			valid.fgcolor = '0 255 120';
 			is_valid = true;
 			outfile.value = filename.value:gsub('%.exe','_ORIGINAL.exe');
 		else
 			is_valid = false;
-			valid.value = 'Fichier non valide';
+			valid.value = 'File is not valid';
 			valid.fgcolor = '255 0 0';
 		end
 	else
-		valid.value = 'Fichier non selectionne';
+		valid.value = 'File not selected';
 		valid.fgcolor = '255 120 0';
 	end
 end
